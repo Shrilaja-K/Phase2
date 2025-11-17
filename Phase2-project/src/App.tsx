@@ -1,35 +1,121 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import './App.css'  
+// import React from "react";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { UserProvider } from "./Components/UserContext";
+// import LoginPage from "./Components/LoginPage";
+// import WelcomePage from "./Components/WelcomePage";
+// import index  from "./Components/index";
+
+// const App: React.FC = () => {
+//   return (
+//     // <UserProvider>
+//     //   <Router>
+//     //     <Routes>
+//     //       <Route path="/" element={<LoginPage />} />
+//     //       <Route path="/welcome" element={<WelcomePage />} />
+//     //     </Routes>
+//     //   </Router>
+//     // </UserProvider>
+    
+//   );
+// };
+
+
+// function App() {
+//   return (
+//     <div>
+//      <index/> 
+//     </div>
+//   )
+// }
+
+// export default App
+
+
+// import { useEffect, useState } from "react";
+// import { store, buycake, buyIcecream } from "./Index";
+
+// function App() {
+//   const [cakes, setCakes] = useState(store.getState().cake.numOfCakes);
+//   const [icecreams, setIcecreams] = useState(store.getState().icecream.numOfIcecreams);
+
+//   useEffect(() => {
+//     const unsubscribe = store.subscribe(() => {
+//       const state = store.getState();
+//       setCakes(state.cake.numOfCakes);
+//       setIcecreams(state.icecream.numOfIcecreams);
+//     });
+//     return () => unsubscribe();
+//   }, []);
+
+//   return (
+//     <div>
+//       <h1>Number of Cakes: {cakes}</h1>
+//       <h1>Number of Icecreams: {icecreams}</h1>
+//       <button onClick={() => store.dispatch(buycake())}>Buy Cake</button>
+//       <button onClick={() => store.dispatch(buyIcecream())}>Buy Icecream</button>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
+// import React, { useEffect, useState } from "react";
+// import { store, fetchUsers } from "./Async";
+
+// function App() {
+
+//   const [state, setState] = useState(store.getState());
+
+//   useEffect(() => {
+  
+//     const unsubscribe = store.subscribe(() => {
+//       setState(store.getState());
+//     });
+
+   
+//     store.dispatch(fetchUsers());
+
+//     return () => unsubscribe();
+//   }, []);
+
+//   const { loading, users, error } = state;
+
+//   return (
+//     <div>
+//       <h1>Users</h1>
+//       {loading && <p>Loading...</p>}
+//       {error && <p>Error: {error}</p>}
+//       <ul>
+//         {users.map((user: any) => (
+//           <li key={user}>{user}</li> 
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
+import React from 'react'
+import CakeContainer from './Components/CakeContainer'
+import { Provider } from 'react-redux'
+import store from './Redux/Cake/Store'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Provider store={store}>
+    <div className="App">
+      <CakeContainer/>
+    </div>
+    </Provider>
   )
 }
 
 export default App
+
+
+
